@@ -1,7 +1,8 @@
-import { sendEmailVerification } from "../emails/email.mjs";
+import { sendEmail } from "../emails/mailtrapConfiguration.mjs";
 import { Auth } from "../models/authModel.mjs";
 import { hashPassword } from "../utils/bcrypt.mjs";
 import { tokenGenerationAndCookieSet } from "../utils/tokenAndCookie.mjs";
+import { VERIFICATION_EMAIL_TEMPLATE } from "../emails/emailTemplates.mjs";
 
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -42,7 +43,16 @@ export const register = async (req, res) => {
     // set cookies
     tokenGenerationAndCookieSet(res, user._id);
 
-    sendEmailVerification(user.email, tokenVerification);
+    // send email
+    const from = "chichebewebdev@gmail.com";
+    const subject = "Email verification";
+    const text = "Please verify your email";
+    const html = VERIFICATION_EMAIL_TEMPLATE.replace(
+      "{verificationCode}",
+      tokenVerification
+    );
+
+    sendEmail(from, user.email, subject, text, html);
 
     return res.status(201).json({
       user: { ...user._doc, password: undefined },
