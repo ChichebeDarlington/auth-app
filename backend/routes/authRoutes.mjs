@@ -12,6 +12,6 @@ router.post("/register", register);
 router.post("/login", login);
 router.post("/logout", logout);
 router.post("/register", register);
-router.post("/verify-auth", verifyAuth);
+router.post("/email-verify", verifyAuth);
 
 export default router;

@@ -2,7 +2,10 @@ import { sendEmail } from "../emails/mailtrapConfiguration.mjs";
 import { Auth } from "../models/authModel.mjs";
 import { hashPassword } from "../utils/bcrypt.mjs";
 import { tokenGenerationAndCookieSet } from "../utils/tokenAndCookie.mjs";
-import { VERIFICATION_EMAIL_TEMPLATE } from "../emails/emailTemplates.mjs";
+import {
+  VERIFICATION_EMAIL_TEMPLATE,
+  WELCOME_EMAIL_TEMPLATE,
+} from "../emails/emailTemplates.mjs";
 
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -67,7 +70,43 @@ export const register = async (req, res) => {
 };
 
 export const verifyAuth = async (req, res) => {
-  console.log("register");
+  const { code } = req.body;
+  try {
+    const user = await Auth.findOne({
+      tokenVerification: code,
+      tokenVerificationExpiresAt: { $gt: Date.now() },
+    });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ msg: "Expired or invalid verification token!" });
+    }
+    user.isVerified = true;
+    user.tokenVerification = undefined;
+    user.tokenVerificationExpiresAt = undefined;
+    await user.save();
+
+    // send email
+    const from = "chichebewebdev@gmail.com";
+    const subject = "Email verification";
+    const text = "Please verify your email";
+    const html = WELCOME_EMAIL_TEMPLATE;
+    sendEmail(from, user.email, subject, text, html);
+
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Email verified successfully",
+      user: {
+        ...user._doc,
+        password: undefined,
+      },
+    });
+  } catch (error) {
+    console.log("error in verify Email ", error);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
 };
 
 export const login = async (req, res) => {
