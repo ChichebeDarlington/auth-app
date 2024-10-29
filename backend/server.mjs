@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/authRoutes.mjs";
 import { connectDatabase } from "./database/storage.mjs";
@@ -10,6 +11,7 @@ const server = express();
 
 server.use(express.json());
 server.use(cookieParser());
+server.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 // routes modules
 server.use("/api/auth", authRoutes);

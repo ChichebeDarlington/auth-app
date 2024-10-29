@@ -134,7 +134,7 @@ export const login = async (req, res) => {
     // generate token
     tokenGenerationAndCookieSet(res, user._id);
 
-    user.lastLogin = new Date();
+    user.LoggedInLast = new Date();
     // save to database
     await user.save();
 
@@ -149,7 +149,6 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   res.clearCookie("token");
-  req.cookie();
   return res
     .status(200)
     .json({ success: true, message: "Logged out successfully" });
