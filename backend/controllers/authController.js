@@ -1,8 +1,8 @@
 import crypto from "crypto";
-import { sendEmail } from "../emails/mailtrapConfiguration.mjs";
+import { sendEmail } from "../emails/mailtrapConfiguration.js";
 import { Auth } from "../models/authModel.mjs";
-import { comparePassword, hashPassword } from "../utils/bcrypt.mjs";
-import { tokenGenerationAndCookieSet } from "../utils/tokenAndCookie.mjs";
+import { comparePassword, hashPassword } from "../utils/bcrypt.js";
+import { tokenGenerationAndCookieSet } from "../utils/tokenAndCookie.js";
 import {
   PASSWORD_RESET_REQUEST_TEMPLATE,
   PASSWORD_RESET_SUCCESS_TEMPLATE,
