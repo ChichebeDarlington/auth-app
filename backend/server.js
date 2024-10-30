@@ -22,10 +22,9 @@ const PORT = process.env.PORT || 7000;
 const __dirname = path.resolve();
 
 if (process.env.NODE_ENV === "production") {
-  server.use(express.static(path.join(__dirname, "frontend/dist")));
+  server.use(express.static(path.join(__dirname, "/frontend/dist")));
 
   server.get("*", (req, res) => {
-    res.set("Content-Type", "application/javascript");
     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
   });
 }
