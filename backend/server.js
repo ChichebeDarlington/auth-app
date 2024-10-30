@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === "production") {
 
   server.get("*", (req, res) => {
     res.set("Content-Type", "application/javascript");
-    res.sendFile(path.resolve(__dirname, "frontend", "index.html"));
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
   });
 }
 server.listen(PORT, () => {
