@@ -178,10 +178,7 @@ export const forgotPasswrod = async (req, res) => {
     const from = "chichebewebdev@gmail.com";
     const subject = "Email verification";
     const text = "Please verify your email";
-    const html = PASSWORD_RESET_REQUEST_TEMPLATE.replace(
-      "{resetURL}",
-      resetURL
-    );
+    const html = resetURL;
 
     await user.save();
 

@@ -10,13 +10,6 @@ dotenv.config();
 
 const server = express();
 
-server.use((req, res, next) => {
-  if (req.url.endsWith(".mjs")) {
-    res.setHeader("Content-Type", "application/javascript");
-  }
-  next();
-});
-
 server.use(express.json());
 server.use(cookieParser());
 server.use(cors({ origin: "http://localhost:5173", credentials: true }));
