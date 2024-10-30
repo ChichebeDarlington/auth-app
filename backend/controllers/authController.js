@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import { sendEmail } from "../emails/mailtrapConfiguration.js";
-import { Auth } from "../models/authModel.mjs";
+import { Auth } from "../models/authModel.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 import { tokenGenerationAndCookieSet } from "../utils/tokenAndCookie.js";
 import {
@@ -8,7 +8,7 @@ import {
   PASSWORD_RESET_SUCCESS_TEMPLATE,
   VERIFICATION_EMAIL_TEMPLATE,
   WELCOME_EMAIL_TEMPLATE,
-} from "../emails/emailTemplates.mjs";
+} from "../emails/emailTemplates.js";
 
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
