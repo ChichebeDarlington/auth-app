@@ -173,7 +173,7 @@ export const forgotPasswrod = async (req, res) => {
     user.passwordResetToken = resetToken;
     user.passwordResetExpiresAt = resetTokenExpiresAt;
 
-    const resetURL = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+    const resetURL = `${process.env.API_URL}/reset-password/${resetToken}`;
     // send email
     const from = "chichebewebdev@gmail.com";
     const subject = "Email verification";
