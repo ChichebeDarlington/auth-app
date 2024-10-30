@@ -183,14 +183,14 @@ export const forgotPasswrod = async (req, res) => {
       resetURL
     );
 
+    await user.save();
+
     sendEmail(from, user.email, subject, text, html);
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Password reset link sent to your email",
     });
-
-    await user.save();
   } catch (error) {
     console.log("error in forgot password ", error);
     return res.status(500).json({ success: false, message: "Server error" });
