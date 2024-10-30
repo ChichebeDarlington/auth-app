@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "SET NODE_ENV=production node backend/server.mjs",
-    "dev": "SET NODE_ENV=development nodemon backend/server.mjs",
+    "start": "NODE_ENV=production node backend/server.mjs",
+    "dev": "NODE_ENV=development nodemon backend/server.mjs",
     "build": "npm install && npm install -prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
