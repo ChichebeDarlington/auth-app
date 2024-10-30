@@ -2,8 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import authRoutes from "./routes/authRoutes.mjs";
-import { connectDatabase } from "./database/storage.mjs";
+import authRoutes from "./routes/authRoutes.js";
+import { connectDatabase } from "./database/storage.js";
 import path from "path";
 
 dotenv.config();
