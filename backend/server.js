@@ -25,7 +25,8 @@ if (process.env.NODE_ENV === "production") {
   server.use(express.static(path.join(__dirname, "frontend/dist")));
 
   server.get("*", (req, res) => {
-    return res.sendFile(path.resolve(__dirname, "frontend", "index.html"));
+    res.set("Content-Type", "application/javascript");
+    res.sendFile(path.resolve(__dirname, "frontend", "index.html"));
   });
 }
 server.listen(PORT, () => {
